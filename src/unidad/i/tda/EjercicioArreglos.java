@@ -14,5 +14,6 @@ public class EjercicioArreglos {
             System.out.println(el);
         }
 
+
     }
 }
