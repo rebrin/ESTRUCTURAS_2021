@@ -45,6 +45,49 @@ public class ListaS {
         return -1;
     }//
 
+    public int eliminaFinal(){
+        if(!vacia()){
+            int el=last.info;
+            //primer caso
+            if(first==last){
+                first=last=null;
+            }else{
+                NodoS tmp;
+                for(tmp=first;tmp.next!=last;tmp=tmp.next){}
+                tmp.next=null;
+                last=tmp;
+            }
+            return el;
+        }
+        return Integer.MIN_VALUE;
+    }
+
+    public int elimina(int borra){
+        if(!vacia()){
+            NodoS tmp=first;
+            if(first==last && borra== tmp.info){
+                first=last=null;
+            }else{
+                if(borra==first.info)
+                    return borraFrente();
+                else if(borra==last.info)
+                    return eliminaFinal();
+                else{
+                    NodoS pred;
+                    for(pred=tmp;
+                        tmp.info!=borra && tmp!=null;
+                        pred=tmp,
+                        tmp=tmp.next){}
+                        pred.next=tmp.next;
+                        tmp.next=null;
+                        return tmp.info;
+                }
+
+            }
+            return Integer.MIN_VALUE;
+        }else
+            return Integer.MIN_VALUE;
+    }
     public void imprimeLista(){
         for(NodoS tmp=first;tmp!=null;tmp=tmp.next)
             System.out.print(tmp.info+" ");
@@ -64,7 +107,9 @@ public class ListaS {
         l.insFinal(3);
         l.insFinal(1);
         l.imprimeLista();
+        System.out.println("eliminado:"+l.elimina(3));
         System.out.println();
-        System.out.println(l.enLista(17));
+
+        l.imprimeLista();
     }
 }
